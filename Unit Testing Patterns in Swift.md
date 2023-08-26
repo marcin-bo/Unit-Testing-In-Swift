@@ -2,6 +2,12 @@
 
 ## Table Of Contents
 1. [How To Test That Function Throws An Error?](#throws)
+    1. [Using `do-catch`](#throws1)
+    1. [Using `XCTAssertThrowsError`](#throws3)
+1. [How To Test That Function Does Not Throw An Error?](#no_throw)
+    1. [Using `do-catch`](#no_throw1)
+    1. [Using `throws` in the test method](#no_throw2)
+    1. [Using `XCTAssertNoThrowError`](#no_throw3)
 1. [How To Test Optional Values?](#optional_values)
 1. [How To Check That a Callback is Not Called?](#not_called)
 1. [How To Test Asynchronous Callbacks](#asynchronous)
@@ -9,7 +15,31 @@
 
 ## How To Test That Function Throws An Error? <a name="throws"></a>
 
-Mark `XCTestCase` methods as throwable to avoid `do-catch` and force `try!` in your test code.
+#### Using `do-catch`
+
+This method adds branching logic (`do-catch`) to the test which is not desired.
+
+```swift
+func test_validate_whenPhoneNumberIsInvalid_shouldThrowException() {
+    let sut = PhoneNumberValidator()
+    let INVALID_NUMBER = "g122345j"
+    
+    do {
+        try sut.validate(INVALID_NUMBER)
+        
+        XCTFail("The validate() was supposed to throw an error.")
+    } catch PhoneNumberValidator.Error {
+        // Successfully passing
+        return
+    } catch {
+        XCTFail("The validate() was supposed to throw `PhoneNumberValidator.Error` when phone number is invalid. A different error was thrown.")
+    }
+}
+```
+
+#### Using `XCTAssertThrowsError`
+
+You can also avoid `do-catch` by using `XCTAssertThrowsError`.
 
 ```swift
 func test_validate_whenPhoneNumberIsInvalid_shouldThrowException() {
@@ -23,6 +53,48 @@ func test_validate_whenPhoneNumberIsInvalid_shouldThrowException() {
     XCTAssertThrowsError(try act(), "Invalid number error should be thrown") { error in // ✅
         XCTAssertEqual(error as? PhoneNumberValidator.Error, .invalidNumber)
     }
+}
+```
+
+## How To Test That Function Does Not Throw An Error? <a name="no_throw"></a>
+
+#### Using `do-catch`  <a name="no_throw1"></a>
+
+```swift
+func test_validate_whenPhoneNumberIsValid_shouldNotThrowException() {
+    let sut = PhoneNumberValidator()
+    let VALID_NUMBER = "777-777-777"
+    
+    do {
+        let result = try sut.validate(VALID_NUMBER)
+        XCTAssertTrue(result)
+    } catch {
+        XCTFail("The validate() was not supposed to throw an error.")
+    }
+}
+```
+
+### Using `throws` in the test method <a name="no_throw2"></a>
+
+Mark `XCTestCase` methods as throwable to avoid `do-catch` in your test code.
+
+```swift
+func test_validate_whenPhoneNumberIsValid_shouldNothrowException() {
+    let sut = PhoneNumberValidator()
+    let VALID_NUMBER = "777-777-777"
+    let result = try sut.validate(VALID_NUMBER)
+    XCTAssertTrue(result)
+}
+```
+
+#### Using `XCTAssertNoThrow` <a name="no_throw3"></a>
+
+```swift
+func test_validate_whenPhoneNumberIsValid_shouldNotThrowException() {
+    let sut = PhoneNumberValidator()
+    let VALID_NUMBER = "777-777-777"
+    
+    XCTAssertNoThrow(try sut.validate(VALID_NUMBER), "The validate() should not throw an error when the phone number is valid")
 }
 ```
 
