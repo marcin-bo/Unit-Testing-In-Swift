@@ -3,6 +3,7 @@
 ## Table Of Contents
 1. [How To Test Functions That `throws`?](#throws)
 1. [How To Test Optional Values?](#optional_values)
+1. [How To Check That a Callback is Not Called?](#not_called)
 
 ## How To Test Functions That `throws`? <a name="throws"></a>
 
@@ -40,5 +41,25 @@ func testOptional() throws {
 }
 ```
 
-## References
+## How To Check That a Callback is Not Called? <a name="not_called"></a>
+
+Use `expectation.isInverted` for to check that a callback is not called:
+
+```swift
+func test_observeQueueBecomingEmpty_whenDequeuedCalledAndQueueIsStillNotEmpty_shouldNotCallObservingHandler() {
+    let sut = QueueService(queue: ["George", "Sam", "Steven"])
+
+    let expectation = self.expectation(description: "Handler for the queue becoming empty")
+    expectation.isInverted = true  // ✅
+
+    queueService.observeQueueBecomingEmpty {
+        XCTFail("The observation handler for the queue becoming empty is not triggered")
+        expectation.fulfill()
+    }
+    
+    sut.dequeue()
+
+    wait(for: [expectation], timeout: 0.05)
+}
+```
 - https://www.avanderlee.com/swift/unit-tests-best-practices/
