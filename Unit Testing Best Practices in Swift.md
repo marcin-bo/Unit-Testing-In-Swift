@@ -190,30 +190,30 @@ XCTAssertEqual(x, y, accuracy: epsilon) // ✅
 Unit tests shouldn't contain magic strings.
 
 ```swift
-func test_addBigNumber_throwsException() {
-    let sut = StringCalculator()
+func test_validate_whenPhoneNumberIsInvalid_shouldThrowException() {
+    let sut = PhoneNumberValidator()
     
     let act = {
-        try sut.add("1001") // Magic string ❌
+        try sut.validate("g122345j") // Magic string ❌
     }
     
-    XCTAssertThrowsError(try act(), "A big number error should be thrown") { error in
-        XCTAssertEqual(error as? StringCalculator.Error, .bigNumber)
+    XCTAssertThrowsError(try act(), "Invalid number error should be thrown") { error in 
+        XCTAssertEqual(error as? PhoneNumberValidator.Error, .invalidNumber)
     }
 }
 ```
 
 ```swift
-func test_addBigNumber_throwsException() {
-    let sut = StringCalculator()
-    let MAXIMUM_RESULT = "1001"
+func test_validate_whenPhoneNumberIsInvalid_shouldThrowException() {
+    let sut = PhoneNumberValidator()
+    let INVALID_NUMBER = "g122345j"
     
     let act = {
-        try sut.add(MAXIMUM_RESULT) // ✅
+        try sut.validate(INVALID_NUMBER) // ✅
     }
     
-    XCTAssertThrowsError(try act(), "A big number error should be thrown") { error in 
-        XCTAssertEqual(error as? StringCalculator.Error, .bigNumber)
+    XCTAssertThrowsError(try act(), "Invalid number error should be thrown") { error in 
+        XCTAssertEqual(error as? PhoneNumberValidator.Error, .invalidNumber)
     }
 }
 ```

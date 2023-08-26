@@ -12,16 +12,16 @@
 Mark `XCTestCase` methods as throwable to avoid `do-catch` and force `try!` in your test code.
 
 ```swift
-func test_addBigNumber_throwsException() {
-    let sut = StringCalculator()
-    let MAXIMUM_RESULT = "1001"
+func test_validate_whenPhoneNumberIsInvalid_shouldThrowException() {
+    let sut = PhoneNumberValidator()
+    let INVALID_NUMBER = "g122345j"
     
     let act = {
-        try sut.add(MAXIMUM_RESULT)
+        try sut.validate(INVALID_NUMBER)
     }
     
-    XCTAssertThrowsError(try act(), "A big number error should be thrown") { error in // ✅
-        XCTAssertEqual(error as? StringCalculator.Error, .bigNumber)
+    XCTAssertThrowsError(try act(), "Invalid number error should be thrown") { error in // ✅
+        XCTAssertEqual(error as? PhoneNumberValidator.Error, .invalidNumber)
     }
 }
 ```
