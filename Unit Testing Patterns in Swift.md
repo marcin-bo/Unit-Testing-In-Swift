@@ -51,10 +51,10 @@ func test_observeQueueBecomingEmpty_whenDequeuedCalledAndQueueIsStillNotEmpty_sh
     let sut = QueueService(queue: ["George", "Sam", "Steven"])
 
     let expectation = self.expectation(description: "Handler for the queue becoming empty")
-    expectation.isInverted = true  // ✅
+    expectation.isInverted = true // ✅
 
-    queueService.observeQueueBecomingEmpty {
-        XCTFail("The observation handler for the queue becoming empty is not triggered")
+    sut.observeQueueBecomingEmpty {
+        XCTFail("The observation handler for the queue becoming empty should not be triggered")
         expectation.fulfill()
     }
     
