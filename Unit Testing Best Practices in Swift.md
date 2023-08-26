@@ -2,8 +2,8 @@
 
 # Table Of Contents
 1. [Follow the FIRST Principles](#first)
-1. [Test only public methods](#test_public)
-1. [Name the test properly](#naming)
+1. [Test Only Public Methods](#test_public)
+1. [Name the Test Properly ](#naming)
 1. [Follow the AAA structure](#unit_tests_structure)
 1. [Avoid Logic in Tests](#logic_in_tests)
 1. [Avoid Test Interdependence](#unit_tests_interdependence)
@@ -20,7 +20,7 @@
     1. [Tear Down State After a Specific Test Method](#unit_tests_best_practices_side_effects3)
 1. [Use the Power of Properties](#properties)
 1. [Use the Power of Helper Methods](#helpers)
-1. [Use proper testing strategies for UI Testing](#unit_tests_best_practices_testing_ui)
+1. [Use Proper Testing Strategies for UI Testing](#unit_tests_best_practices_testing_ui)
 1. [References](#unit_tests_best_practices_references)
 
 # Follow the FIRST Principles <a name="first"></a>
@@ -37,7 +37,7 @@
     - Unit tests shouldn't take a disproportionately long time to write compared to the code being tested. 
     - If you find testing the code taking a large amount of time compared to writing the code, consider a design that is more testable.
 
-# Test only public methods <a name="test_public"></a>
+# Test Only Public Methods <a name="test_public"></a>
 
 - In most cases, there shouldn't be a need to test a private method. 
     - Private methods are **an implementation detail** and never exist in isolation.
@@ -47,7 +47,7 @@
         - At some point, there's going to be a public facing method that calls the private method as part of its implementation.
 
 
-# Name the test properly <a name="naming"></a>
+# Name the Test Properly  <a name="naming"></a>
 
 Name your tests properly. Use a consistent naming convention.
 
@@ -383,7 +383,7 @@ class UserStorageTests: XCTestCase {
 }
 ```
 
-# Use proper testing strategies for UI Testing <a name="unit_tests_best_practices_testing_ui"></a>
+# Use Proper Testing Strategies for UI Testing <a name="unit_tests_best_practices_testing_ui"></a>
 
 The common strategies of testing UI:
 - End-to-end tests (think `XCUI`-driven-tests)
