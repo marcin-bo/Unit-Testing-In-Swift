@@ -2,7 +2,7 @@
 
 Welcome! 👋
 
-This is a guide to fundamental unit testing terminology, best practices, and patterns you can apply to your Swift project. 
+This is a guide to fundamental unit testing terminology, unit testing best practices, and unit testing patterns in Swift.
 I also encourage contributions from the iOS developer community to turn this repository into a collaborative hub for sharing knowledge.
 
 # Table Of Contents
