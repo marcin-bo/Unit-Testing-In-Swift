@@ -4,6 +4,7 @@
 1. [How To Test Functions That `throws`?](#throws)
 1. [How To Test Optional Values?](#optional_values)
 1. [How To Check That a Callback is Not Called?](#not_called)
+1. [How To Test Asynchronous Callbacks](#asynchronous)
 1. [References](#references)
 
 ## How To Test Functions That `throws`? <a name="throws"></a>
@@ -42,6 +43,27 @@ func testOptional() throws {
 }
 ```
 
+## How To Test Asynchronous Callbacks? <a name="asynchronous"></a>
+
+```swift
+func test_fetch_shouldGetBooks() {
+    let sut = BookRepository()
+    
+    // Create an expectation ✅
+    let expectation = expectation(description: "Loading books") 
+
+    sut.fetch {
+        // Mark the expectation as fulfilled ✅
+        expectation.fulfill()
+    }
+
+    // Wait for all expectations to be fulfilled ✅
+    waitForExpectations(timeout: 1)
+
+    XCTAssertFalse(sut.books.isEmpty)
+}
+```
+
 ## How To Check That a Callback is Not Called? <a name="not_called"></a>
 
 Use `expectation.isInverted` for to check that a callback is not called:
@@ -50,7 +72,7 @@ Use `expectation.isInverted` for to check that a callback is not called:
 func test_observeQueueBecomingEmpty_whenDequeuedCalledAndQueueIsStillNotEmpty_shouldNotCallObservingHandler() {
     let sut = QueueService(queue: ["George", "Sam", "Steven"])
 
-    let expectation = self.expectation(description: "Handler for the queue becoming empty")
+    let expectation = expectation(description: "Handler for the queue becoming empty")
     expectation.isInverted = true // ✅
 
     sut.observeQueueBecomingEmpty {
@@ -60,7 +82,7 @@ func test_observeQueueBecomingEmpty_whenDequeuedCalledAndQueueIsStillNotEmpty_sh
     
     sut.dequeue()
 
-    wait(for: [expectation], timeout: 0.05)
+    waitForExpectations(timeout: 0.1)
 }
 ```
 
