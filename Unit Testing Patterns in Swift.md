@@ -115,27 +115,6 @@ func testOptional() throws {
 }
 ```
 
-## How To Test Asynchronous Callbacks? <a name="asynchronous"></a>
-
-```swift
-func test_fetch_shouldGetBooks() {
-    let sut = BookRepository()
-    
-    // Create an expectation ✅
-    let expectation = expectation(description: "Loading books") 
-
-    sut.fetch {
-        // Mark the expectation as fulfilled ✅
-        expectation.fulfill()
-    }
-
-    // Wait for all expectations to be fulfilled ✅
-    waitForExpectations(timeout: 1)
-
-    XCTAssertFalse(sut.books.isEmpty)
-}
-```
-
 ## How To Check That a Callback is Not Called? <a name="not_called"></a>
 
 Use `expectation.isInverted` for to check that a callback is not called:
@@ -155,6 +134,27 @@ func test_observeQueueBecomingEmpty_whenDequeuedCalledAndQueueIsStillNotEmpty_sh
     sut.dequeue()
 
     waitForExpectations(timeout: 0.1)
+}
+```
+
+## How To Test Asynchronous Callbacks? <a name="asynchronous"></a>
+
+```swift
+func test_fetch_shouldGetBooks() {
+    let sut = BookRepository()
+    
+    // Create an expectation ✅
+    let expectation = expectation(description: "Loading books") 
+
+    sut.fetch {
+        // Mark the expectation as fulfilled ✅
+        expectation.fulfill()
+    }
+
+    // Wait for all expectations to be fulfilled ✅
+    waitForExpectations(timeout: 1)
+
+    XCTAssertFalse(sut.books.isEmpty)
 }
 ```
 
