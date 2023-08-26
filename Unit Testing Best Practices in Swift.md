@@ -18,6 +18,8 @@
     1. [Prepare and Tear Down State for a Test Class](#unit_tests_best_practices_side_effects1)
     1. [Prepare and Tear Down State for Each Test Method](#unit_tests_best_practices_side_effects2)
     1. [Tear Down State After a Specific Test Method](#unit_tests_best_practices_side_effects3)
+1. [Use the Power of Properties](#properties)
+1. [Use the Power of Helper Methods](#helpers)
 1. [Use proper testing strategies for UI Testing](#unit_tests_best_practices_testing_ui)
 1. [References](#unit_tests_best_practices_references)
 
@@ -329,6 +331,54 @@ func testMethod2() throws {
     }
     addTeardownBlock {
         // XCTest executes this first when testMethod2() ends.
+    }
+}
+```
+
+# Use the Power of Helper Methods <a name="helpers"></a>
+
+You should be careful when initializing SUT (system under test) with all dependencies in a `setUp()` method. It cane easily result in [Test Interdependence](#unit_tests_interdependence) which should be avoided.
+
+It's better to create factory method for initializing SUT with different configurations:
+
+```swift
+class UserStorageTests: XCTestCase {
+
+    // MARK: - Helpers
+    func makeSUT() -> UserStorage {
+        UserStorage(storage: storageMock, secureStorage: secureStorageMock)
+    }
+
+    func makeSUT(with user: User) -> UserStorage {
+        let sut = makeSUT()
+        sut.save(user)
+        return sut
+    }
+} 
+```
+
+# Use the Power of Properties <a name="properties"></a>
+
+Extract the duplicated test data and mocks into properties.
+
+```swift
+class UserStorageTests: XCTestCase {
+    let userDefaults = UserDefaultsMock() // ✅
+    let keychain = KeychainMock() // ✅
+    let user = User(id: 1, username: "U1", password: "P1") // ✅
+
+    func testUsernameSavedToStorage() {
+        makeSUT().save(user)
+        XCTAssertNotNil(userDefaults.inputUsername)
+    }
+
+    func testPasswordSavedToSecureStorage() {
+        makeSUT().save(user)
+        XCTAssertNotNil(keychain.inputPassword)
+    }
+
+    func makeSUT() -> UserStorage {
+        UserStorage(storage: userDefaults, secureStorage: keychain)
     }
 }
 ```
