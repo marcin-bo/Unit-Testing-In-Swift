@@ -1,1 +1,12 @@
-# Unit-Testing-In-Swift
+# Unit Testing in Swift
+
+Welcome! 👋
+
+This is a guide to fundamental unit testing terminology, best practices, and patterns you can apply to your Swift project. 
+I also encourage contributions from the iOS developer community to turn this repository into a collaborative hub for sharing knowledge.
+
+# Table Of Contents
+1. <a href="Unit Testing Terminology.md">Unit Testing Terminology</a>
+1. <a href="Unit Testing Best Practices in Swift.md">Unit Testing Best Practices in Swift</a>
+1. <a href="Unit Testing Patterns in Swift.md">Unit Testing Patterns in Swift</a>
+1. <a href="Testing View Controllers in Swift.md">Testing View Controllers in Swift</a>
