@@ -52,6 +52,11 @@ Name your tests properly. Use a consistent naming convention.
 Example of a good template for unit tests naming convention:
 ```swift
 func test_methodName_whenCondition_shouldExpectation {}
+
+// OR
+
+func test_behaviour_whenCondition_shouldExpectation {}
+    
 ```
 
 # Follow the Arrange-Act-Assert structure <a name="unit_tests_structure"></a>
