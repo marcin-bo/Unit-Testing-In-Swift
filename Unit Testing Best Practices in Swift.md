@@ -47,7 +47,7 @@
         - At some point, there's going to be a public facing method that calls the private method as part of its implementation.
 
 
-# Name the Test Properly  <a name="naming"></a>
+# Name the Test Properly <a name="naming"></a>
 
 Name your tests properly. Use a consistent naming convention.
 
@@ -386,8 +386,8 @@ class UserStorageTests: XCTestCase {
 # Use Proper Testing Strategies for UI Testing <a name="unit_tests_best_practices_testing_ui"></a>
 
 The common strategies of testing UI:
-- End-to-end tests (think `XCUI`-driven-tests)
-- Snapshot tests
+- End-to-end tests (think `XCUI`-driven-tests).
+- Snapshot tests:
     - Suited for testing **visual layout**.
     - Not suited for testing *the content*.
         - Testing *the content* of our UI is straightforward and can be done on low-level with unit tests.
@@ -396,7 +396,7 @@ Both kinds of tests are expensive to maintain since the user interface changes q
 
 Strategy for UI testing:
 - Use snapshot tests for testing **visual layout**.
-- Use low-level unit tests for testing *the content*
+- Use low-level unit tests for testing *the content*.
 
 # References <a name="unit_tests_best_practices_references"></a>
 
