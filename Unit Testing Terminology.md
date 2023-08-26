@@ -3,15 +3,12 @@
 # Table Of Contents
 
 1. [Different Types of Test Doubles](#test_doubles)
-    1. [Fake](#dummy)
-    1. [Fake](#fake)
-    1. [Mock](#mock)
+    1. [Dummy](#dummy)
     1. [Stub](#stub)
+    1. [Fake](#fake)
+    1. [Spy](#spy)
+    1. [Mock](#mock)
 1. [References](#references)
-
-
-# TODO
-- Provide some examples.    
 
 # Different Types of Test Doubles <a name="test_doubles"></a>
 
