@@ -197,7 +197,7 @@ func test_addBigNumber_throwsException() {
         try sut.add("1001") // Magic string ❌
     }
     
-    XCTAssertThrowsError(try act(), "An big number error should be thrown") { error in
+    XCTAssertThrowsError(try act(), "A big number error should be thrown") { error in
         XCTAssertEqual(error as? StringCalculator.Error, .bigNumber)
     }
 }
@@ -212,7 +212,7 @@ func test_addBigNumber_throwsException() {
         try sut.add(MAXIMUM_RESULT) // ✅
     }
     
-    XCTAssertThrowsError(try act(), "An big number error should be thrown") { error in 
+    XCTAssertThrowsError(try act(), "A big number error should be thrown") { error in 
         XCTAssertEqual(error as? StringCalculator.Error, .bigNumber)
     }
 }
