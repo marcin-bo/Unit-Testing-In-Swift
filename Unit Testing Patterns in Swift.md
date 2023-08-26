@@ -1,13 +1,13 @@
 # Unit Testing Patterns in Swift
 
 ## Table Of Contents
-1. [How To Test Functions That `throws`?](#throws)
+1. [How To Test That Function Throws An Error?](#throws)
 1. [How To Test Optional Values?](#optional_values)
 1. [How To Check That a Callback is Not Called?](#not_called)
 1. [How To Test Asynchronous Callbacks](#asynchronous)
 1. [References](#references)
 
-## How To Test Functions That `throws`? <a name="throws"></a>
+## How To Test That Function Throws An Error? <a name="throws"></a>
 
 Mark `XCTestCase` methods as throwable to avoid `do-catch` and force `try!` in your test code.
 
