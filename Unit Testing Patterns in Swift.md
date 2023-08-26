@@ -4,6 +4,7 @@
 1. [How To Test Functions That `throws`?](#throws)
 1. [How To Test Optional Values?](#optional_values)
 1. [How To Check That a Callback is Not Called?](#not_called)
+1. [References](#references)
 
 ## How To Test Functions That `throws`? <a name="throws"></a>
 
@@ -62,4 +63,6 @@ func test_observeQueueBecomingEmpty_whenDequeuedCalledAndQueueIsStillNotEmpty_sh
     wait(for: [expectation], timeout: 0.05)
 }
 ```
+
+## References <a name="references"></a>
 - https://www.avanderlee.com/swift/unit-tests-best-practices/
