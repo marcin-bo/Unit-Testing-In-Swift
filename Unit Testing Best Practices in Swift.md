@@ -398,7 +398,7 @@ Strategy for UI testing:
 - Use snapshot tests for testing **visual layout**.
 - Use low-level unit tests for testing *the content*
 
-## References <a name="unit_tests_best_practices_references"></a>
+# References <a name="unit_tests_best_practices_references"></a>
 
 - https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices
 - https://www.vadimbulavin.com/unit-testing-best-practices-on-ios-with-swift/
