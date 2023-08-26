@@ -9,4 +9,4 @@ I also encourage contributions from the iOS developer community to turn this rep
 1. <a href="Unit Testing Terminology.md">Unit Testing Terminology</a>
 1. <a href="Unit Testing Best Practices in Swift.md">Unit Testing Best Practices in Swift</a>
 1. <a href="Unit Testing Patterns in Swift.md">Unit Testing Patterns in Swift</a>
-1. <a href="Testing View Controllers in Swift.md">Testing View Controllers in Swift</a>
+1. <a href="Unit Testing View Controllers in Swift.md">Unit Testing View Controllers in Swift</a>

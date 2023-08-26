@@ -1,4 +1,4 @@
-# Testing View Controllers in Swift
+# Unit Testing View Controllers in Swift
 
 # TODO
 - Provide examples for unit testing view controllers.
