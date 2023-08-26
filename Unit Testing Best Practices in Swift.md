@@ -190,7 +190,7 @@ XCTAssertEqual(x, y, accuracy: epsilon) // ✅
 Unit tests shouldn't contain magic strings.
 
 ```swift
-func test_addBigNumber_throwsException() throws {
+func test_addBigNumber_throwsException() {
     let sut = StringCalculator()
     
     let act = {
@@ -204,7 +204,7 @@ func test_addBigNumber_throwsException() throws {
 ```
 
 ```swift
-func test_addBigNumber_throwsException() throws {
+func test_addBigNumber_throwsException() {
     let sut = StringCalculator()
     let MAXIMUM_RESULT = "1001"
     
