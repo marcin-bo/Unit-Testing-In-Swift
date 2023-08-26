@@ -10,7 +10,7 @@
     1. [Using `XCTAssertNoThrowError`](#no_throw3)
 1. [How To Test Optional Values?](#optional_values)
 1. [How To Check That a Callback is Not Called?](#not_called)
-1. [How To Test Asynchronous Callbacks](#asynchronous)
+1. [How To Test Asynchronous Callbacks?](#asynchronous)
 1. [References](#references)
 
 ## How To Test That Function Throws An Error? <a name="throws"></a>
