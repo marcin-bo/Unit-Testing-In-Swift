@@ -49,7 +49,9 @@ struct DummyRepository: Repository {
 - **Stubs** are objects that **return predefined values**:
     - Functions return hard-coded values. It always returns the same output regardless of the input.
     - Void functions are empty.
-    - Dynamic stubbed behaviour: we set an object property, and then, when we call the tested function, it returns that property as a result.
+    - Dynamic stubbed behaviour:
+        - We set a Stub property to a certain value, and then, when we call Stub's tested function, it returns that value as a result.
+        - Tested function completing with an error, if any was assigned to the Stub object.
 - They don't have working implementations.
 - Examples: 
     - A Stub that always return the same value when called with any arguments.
