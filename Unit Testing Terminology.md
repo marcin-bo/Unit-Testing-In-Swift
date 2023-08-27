@@ -68,8 +68,8 @@ struct DummyRepository: Repository {
 
 ## Spy <a name="spy"></a>
 
-- **Spies** are objects that **replace or extend the concrete implementation of a dependency**.
-- Spies have some with some recording capability: they capture the messages (invocations, functions).
+- Spies are usually objects with a single responsibility of **capturing the received messages/functions**.
+    - Spies have some recording capability: they save invoked messages.
 - Spies can help us verify:
     - What functions were called.
     - How many times the function was invoked, with which parameters and in which order.
@@ -117,3 +117,4 @@ final class HTTPClientSpy: HTTPClient {
 - https://proandroiddev.com/the-definitive-guide-to-test-doubles-on-android-part-1-theory-5aa2bffb568c
 - https://www.educative.io/answers/what-is-faking-vs-mocking-vs-stubbing
 - http://xunitpatterns.com/Test%20Double.html
+- https://academy.essentialdeveloper.com/courses/447455/lectures/8644863
