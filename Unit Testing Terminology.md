@@ -98,7 +98,7 @@ final class HTTPClientSpy: HTTPClient {
 ## Mock <a name="mock"></a>
 
 - **Mocks** are objects that **have predefined behavior and expectations.**.
-    - Can act as Stubs, but the behavior of a Mock can be changed dynamically (can return dynamic value).
+    - Can act as a Stub, but the behavior of a Mock can be changed dynamically (can return dynamic value).
     - Can also act a Spy as it, for example, allows us to verify that a method was called.
 - Mocks are generally used to test the behavior of our code rather than its output.
     -  We can use mocks to verify that our code is calling the dependencies in an expected way.
