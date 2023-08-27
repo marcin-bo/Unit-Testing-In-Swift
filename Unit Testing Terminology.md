@@ -68,13 +68,31 @@ struct DummyRepository: Repository {
 ## Spy <a name="spy"></a>
 
 - **Spies** are objects that **replace or extend the concrete implementation of a dependency**.
-    - It can be done by overriding some methods to record relevant information for the test verification.
-- Lets us verify what functions were called, with what arguments, when, and how often.
-    - Spies have some with some recording capability.
+- Spies have some with some recording capability: they capture the messages (invocations, functions).
+- Spies can help us verify:
+    - What functions were called.
+    - How many times the function was invoked, with which parameters and in which order.
 - We should use Spies where we don't care about the return values of functions.
 
 <img src="images/spy_usage.jpg" width="400" />
 
+```swift
+final class HTTPClientSpy: HTTPClient {
+    private var messages = [(url: URL, completion: (Error) -> Void)]()
+
+    var requestedURLs: [URL] {
+    	return messages.map { $0.url }
+    }
+
+    func get(from url: URL, completion: @escaping (Error) -> Void) {
+    	messages.append((url, completion))
+    }
+
+    func complete(with error: Error, at index: Int = 0) {
+    	messages[index].completion(error)
+    }
+}
+```
 
 ## Mock <a name="mock"></a>
 
