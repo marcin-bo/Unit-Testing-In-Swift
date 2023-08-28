@@ -2,6 +2,7 @@
 
 ## Table Of Contents
 1. [How To Handle `XCTAssert*` in Helper Methods?](#file_line)
+1. [How To Detect Memory Leaks in Unit Tests?](#memory_leaks)
 1. [How To Test That Function Throws An Error?](#throws)
     1. [Using `do-catch`](#throws1)
     1. [Using `XCTAssertThrowsError`](#throws3)
@@ -30,6 +31,33 @@ func test_method() {
 private func helperExpect(param: Bool, file: StaticString = #filePath, line: UInt = #line) {
     //...
     XCTAssertTrue(param: Bool, file: file, line: line) // Not here ❌
+}
+```
+
+## How To Detect Memory Leaks in Unit Tests? <a name="memory_leaks"></a>
+
+If you're testing the collaboration between two classes in a parent-child relationship (for example, where the parent is the SUT and the child is a Spy), there's a risk of having a retain cycle, especially when asynchronous functions with closures are involved. To verify the presence of a retain cycle and potential memory leaks, you can follow these steps:
+
+```swift
+// A factory helper for SUT creation
+private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> SomeSutType {
+    // Instantiate the Spy
+    let spy = ...
+    
+    // Instantiate the SUT 
+    let sut = ...
+    
+    assertForMemoryLeak(spy, file: file, line: line) // ✅  Check the Spy instance for memory leaks
+    assertForMemoryLeak(sut, file: file, line: line) // ✅  Check the SUT instance for memory leaks
+        
+    return sut
+}
+
+private func assertForMemoryLeak(_ object: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+    // ✅  This block runs assertion when a test is finished
+    addTeardownBlock { [weak object] in
+        XCAssertNil(object, "The object instance has not been deallocated.", file: file, line: line)
+    }
 }
 ```
 
