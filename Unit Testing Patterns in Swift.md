@@ -1,6 +1,7 @@
 # Unit Testing Patterns in Swift
 
 ## Table Of Contents
+1. [How To Handle `XCTAssert*` in Helper Methods?](#file_line)
 1. [How To Test That Function Throws An Error?](#throws)
     1. [Using `do-catch`](#throws1)
     1. [Using `XCTAssertThrowsError`](#throws3)
@@ -12,6 +13,25 @@
 1. [How To Check That a Callback is Not Called?](#not_called)
 1. [How To Test Asynchronous Callbacks?](#asynchronous)
 1. [References](#references)
+
+## How To Handle `XCTAssert*` in Helper Methods? <a name="file_line"></a>
+
+When calling the `XCTAssert*` functions outside the test method (e.g., in helper methods), it's crucial to provide the `#filePath` and `#line` parameters. 
+This allows Xcode to precisely identify the specific test that failed and its location (the actual tested method, not a helper method).
+
+```swift
+func test_method() {
+    // ... Arrange & Act
+    
+    // Assert: helper method
+    helperExpect(param) // It should fail here ✅
+}
+
+private func helperExpect(param, filePath: StaticString = #filePath, line: UInt = #line) {
+    //...
+    XCTAssertTrue(param, file: file, line: line) // Not here ❌
+}
+```
 
 ## How To Test That Function Throws An Error? <a name="throws"></a>
 
