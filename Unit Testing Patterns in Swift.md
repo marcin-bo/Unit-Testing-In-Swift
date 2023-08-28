@@ -27,9 +27,9 @@ func test_method() {
     helperExpect(param) // It should fail here ✅
 }
 
-private func helperExpect(param, filePath: StaticString = #filePath, line: UInt = #line) {
+private func helperExpect(param: Bool, file: StaticString = #filePath, line: UInt = #line) {
     //...
-    XCTAssertTrue(param, file: file, line: line) // Not here ❌
+    XCTAssertTrue(param: Bool, file: file, line: line) // Not here ❌
 }
 ```
 
