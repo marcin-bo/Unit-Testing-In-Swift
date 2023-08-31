@@ -47,13 +47,13 @@ private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> Some
     // Instantiate the SUT 
     let sut = ...
     
-    assertForMemoryLeak(spy, file: file, line: line) // ✅  Check the Spy instance for memory leaks
-    assertForMemoryLeak(sut, file: file, line: line) // ✅  Check the SUT instance for memory leaks
+    assertForMemoryLeakOnTeardown(spy, file: file, line: line) // ✅  Check the Spy instance for memory leaks
+    assertForMemoryLeakOnTeardown(sut, file: file, line: line) // ✅  Check the SUT instance for memory leaks
         
     return sut
 }
 
-private func assertForMemoryLeak(_ object: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+private func assertForMemoryLeakOnTeardown(_ object: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
     // ✅  This block runs assertion when a test is finished
     addTeardownBlock { [weak object] in
         XCAssertNil(object, "The object instance has not been deallocated.", file: file, line: line)
