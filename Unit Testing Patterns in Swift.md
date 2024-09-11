@@ -13,6 +13,7 @@
 1. [How To Test Optional Values?](#optional_values)
 1. [How To Check That a Callback is Not Called?](#not_called)
 1. [How To Test Asynchronous Callbacks?](#asynchronous)
+1. [How To Test `viewDidLoad` method from `UIViewController`?](#viewDidLoad)
 1. [References](#references)
 
 ## How To Handle `XCTAssert*` in Helper Methods? <a name="file_line"></a>
@@ -161,6 +162,16 @@ func testOptional() throws {
     let unwrappedValue = try XCTUnwrap(optionalValue) // ✅
     XCTAssertEqual(unwrappedValue, 11)
 }
+
+func test_viewDidLoad_loadsConsentScript() throws {
+    // Given `SomeViewController()` which might return `nil`
+    let sut = try XCTUnwrap(SomeViewController())
+
+    // When
+    sut.loadViewIfNeeded()
+
+    /* ... */
+}
 ```
 
 ## How To Check That a Callback is Not Called? <a name="not_called"></a>
@@ -203,6 +214,23 @@ func test_fetch_shouldGetBooks() {
     waitForExpectations(timeout: 1)
 
     XCTAssertFalse(sut.books.isEmpty)
+}
+```
+
+## How To Test `viewDidLoad` method from `UIViewController`? <a name="viewDidLoad"></a>
+
+Do not call the `viewDidLoad` method directly, as it might be called multiple times. Instead, call `loadViewIfNeeded` to invoke `viewDidLoad` indirectly.
+
+```swift
+func test_viewDidLoad() {
+    // Given
+    let sut = SomeViewController()
+
+    // When
+    sut.loadViewIfNeeded()
+
+    // Then
+    /* ... */
 }
 ```
 
